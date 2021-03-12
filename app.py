@@ -65,10 +65,22 @@ def random_sort(roster, team):
         team_roster[j].append(team[j])
 
         for _ in range(0,max_team_people):
-            team_roster[j] + (random.choices(roster))
+            team_roster[j] += (random.choices(roster))
 
-    print(team_roster)
+    #print(team_roster)
     return team_roster
+
+def print_draft_panthers(game_time):
+
+    panthers = game_time[0]
+
+    '''for i in range(0,len(panthers)):
+        print(panthers[i])
+        panthers.split'''
+
+    for k,v in game
+
+            
 
 
 name = unpack_player_name()
@@ -77,5 +89,7 @@ value = unpack_player_experience()
 roster = create_dict(name, height, value)
 team = teams()
 
-random_sort(roster, team)
+game_time = random_sort(roster, team)
+
+print_draft_panthers(game_time)
 
