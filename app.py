@@ -73,8 +73,14 @@ def random_sort(roster, team):
     return team_roster
 
 def draft_team_players(game_time):
+    try:
+        team_number = int(input("\n1) Panthers \n2) Bandits  \n3) Warriors\n \nPick a Team: "))-1
 
-    team_number = int(input("\n1) Panthers: \n2) Bandits:  \n3) Warriors \nPick a Team: "))-1
+        if team_number < 1 and team_number > 3:
+            raise Exception('Enter number 1, 2, or 3')
+    except ValueError:
+        print("Please enter in a number")
+    
 
     team_players = game_time[team_number]
     player_name =  []
@@ -110,15 +116,16 @@ def print_the_list(drafted_team):
     for i in range(0, len(height_in_int)):
         height.append(int(height_in_int[i]))
 
-    average_height = statistics.mean(height)
+    average_height = round(statistics.mean(height),2)
+    dashes = "-"*30
 
 
-    print("\nNow Showing Stats For: {}\n".format(drafted_team[0][0]))
+    print("\nNow Showing Stats For: {}\n\nStart of Data\n{}".format(drafted_team[0][0],dashes))
 
-    print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches".format(total_players,experienced_players,inexperienced_players, average_height))
+    print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches\n{}".format(total_players,experienced_players,inexperienced_players, average_height, dashes))
 
-    print("\nPlayers on Team: \n\t{}".format(names))
-    print("\nGuardians of Players: \n\t{}\n".format(_names))
+    print("Players on Team: \n\t{}".format(names))
+    print("\nGuardians of Players: \n\t{}\n{}\nEnd of Data\n".format(_names, dashes))
 
 
 if __name__ == "__main__":
