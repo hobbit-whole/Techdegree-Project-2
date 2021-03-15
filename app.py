@@ -72,16 +72,7 @@ def random_sort(roster, team):
     #print(team_roster)
     return team_roster
 
-def draft_team_players(game_time):
-    try:
-        team_number = int(input("\n1) Panthers \n2) Bandits  \n3) Warriors\n \nPick a Team: "))-1
-
-        if team_number < 1 and team_number > 3:
-            raise Exception('Enter number 1, 2, or 3')
-    except ValueError:
-        print("Please enter in a number")
-    
-
+def draft_team_players(game_time, team_number):
     team_players = game_time[team_number]
     player_name =  []
     player_height = []
@@ -118,8 +109,7 @@ def print_the_list(drafted_team):
 
     average_height = round(statistics.mean(height),2)
     dashes = "-"*30
-
-
+    
     print("\nNow Showing Stats For: {}\n\nStart of Data\n{}".format(drafted_team[0][0],dashes))
 
     print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches\n{}".format(total_players,experienced_players,inexperienced_players, average_height, dashes))
@@ -137,6 +127,20 @@ if __name__ == "__main__":
     team = teams()
     game_time = random_sort(roster, team)
 
-    drafted_team = draft_team_players(game_time)
-    print_the_list(drafted_team)
+    continuing_on = ''
+    while continuing_on.lower() != 'n':
+        try:
+            team_number = int(input("\n1) Panthers \n2) Bandits  \n3) Warriors\n \nPick a Team: "))-1
+        except ValueError:
+            print("Please enter in a number")
+        
+        drafted_team = draft_team_players(game_time, team_number)
+    
+        print_the_list(drafted_team)
+        continuing_on = input("\nWould you like to get stats [y/n]: ")
+
+        
+
+    
+
     
