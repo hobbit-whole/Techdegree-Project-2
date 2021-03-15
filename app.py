@@ -1,23 +1,25 @@
 from constants import TEAMS, PLAYERS
 from collections import defaultdict
-import random
+import random, statistics
 
+player_info = []
+team_info = []
 
-if __name__ == "__main__":
-    player_info = []
-    team_info = []
+for player in PLAYERS:
+    player_info.append(player)
 
-    for player in PLAYERS:
-        player_info.append(player)
-
-    for team in TEAMS:
-        team_info.append(team)
-
+for team in TEAMS:
+    team_info.append(team)
 
 def unpack_player_name():
     names = [d['name'] for d in player_info if 'name' in d]
     #print(names)
     return names
+
+def unpack_player_guardians():
+    guardians = [d['guardians'] for d in player_info if 'guardians' in d]
+    #print(guardians)
+    return guardians
 
 def unpack_player_height():
     height = [d['height'] for d in player_info if 'height' in d]
@@ -41,12 +43,12 @@ def unpack_player_experience():
     return(value)
 
 
-def create_dict(name, height, value):
+def create_dict(name, height, value, guardians):
 
     roster = defaultdict(list)
     for i in range(0,len(player_info)):
-        roster[i] = name[i] + ", " + height[i] + ", " + value[i]
-   # print(roster)
+        roster[i] = name[i], height[i], value[i], guardians[i]
+    #print(roster)
     return roster
 
 
@@ -70,26 +72,64 @@ def random_sort(roster, team):
     #print(team_roster)
     return team_roster
 
-def print_draft_panthers(game_time):
+def draft_team_players(game_time):
 
-    panthers = game_time[0]
+    team_number = int(input("Pick a Team (1, 2, or 3): "))-1
 
-    '''for i in range(0,len(panthers)):
-        print(panthers[i])
-        panthers.split'''
+    team_players = game_time[team_number]
+    player_name =  []
+    player_height = []
+    player_experience = []
+    player_guardians = []
 
-    for k,v in game
+    #print(team_number)
 
-            
+    for i in range(1,len(team_players)):
+        player_name.append(team_players[i][0])
+        player_height.append(team_players[i][1])
+        player_experience.append(team_players[i][2])
+        player_guardians.append(team_players[i][3])
 
 
-name = unpack_player_name()
-height = unpack_player_height()
-value = unpack_player_experience()
-roster = create_dict(name, height, value)
-team = teams()
+    return team_players, player_name, player_height, player_experience, player_guardians
 
-game_time = random_sort(roster, team)
 
-print_draft_panthers(game_time)
 
+def print_the_list(drafted_team):
+
+    total_players = len(drafted_team[0])-1
+    experienced_players = drafted_team[3].count('True')
+    inexperienced_players = drafted_team[3].count('False')
+    height_in_int = drafted_team[2]
+    height = []
+    names = ', '.join(drafted_team[1])
+    guardians = ', '.join(drafted_team[4])
+    _names = guardians.replace(" and", ",")
+
+
+    for i in range(0, len(height_in_int)):
+        height.append(int(height_in_int[i]))
+
+    average_height = statistics.mean(height)
+
+
+    print("Now Showing Stats For: {}".format(drafted_team[0][0]))
+
+    print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches".format(total_players,experienced_players,inexperienced_players, average_height))
+
+    print("Players on Team: \n\t{}".format(names))
+    print("Guardians of Players: \n\t{}".format(_names))
+
+
+if __name__ == "__main__":
+    name = unpack_player_name()
+    height = unpack_player_height()
+    value = unpack_player_experience()
+    guardians = unpack_player_guardians()
+    roster = create_dict(name, height, value, guardians)
+    team = teams()
+    game_time = random_sort(roster, team)
+
+    drafted_team = draft_team_players(game_time)
+    print_the_list(drafted_team)
+    
