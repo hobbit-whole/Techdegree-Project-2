@@ -74,7 +74,7 @@ def random_sort(roster, team):
 
 def draft_team_players(game_time):
 
-    team_number = int(input("Pick a Team (1, 2, or 3): "))-1
+    team_number = int(input("\n1) Panthers: \n2) Bandits:  \n3) Warriors \nPick a Team: "))-1
 
     team_players = game_time[team_number]
     player_name =  []
@@ -113,12 +113,12 @@ def print_the_list(drafted_team):
     average_height = statistics.mean(height)
 
 
-    print("Now Showing Stats For: {}".format(drafted_team[0][0]))
+    print("\nNow Showing Stats For: {}\n".format(drafted_team[0][0]))
 
     print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches".format(total_players,experienced_players,inexperienced_players, average_height))
 
-    print("Players on Team: \n\t{}".format(names))
-    print("Guardians of Players: \n\t{}".format(_names))
+    print("\nPlayers on Team: \n\t{}".format(names))
+    print("\nGuardians of Players: \n\t{}\n".format(_names))
 
 
 if __name__ == "__main__":
