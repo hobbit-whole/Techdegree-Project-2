@@ -13,32 +13,37 @@ for team in TEAMS:
 
 def unpack_player_name():
     names = [d['name'] for d in player_info if 'name' in d]
+    names = ', '.join(names)
     #print(names)
     return names
 
 def unpack_player_guardians():
     guardians = [d['guardians'] for d in player_info if 'guardians' in d]
-    #print(guardians)
-    return guardians
+
+    guardians = ', '.join(guardians)
+    _names_of_guard = guardians.replace(" and", ",")
+    #print(_names_of_guard)
+    return _names_of_guard
 
 def unpack_player_height():
     height = [d['height'] for d in player_info if 'height' in d]
     high = []
-    for i in range(len(height)):
-        high.append(height[i][0:2])
-   # print(high)
+    for i in range(0,len(height)):
+        high.append(int(height[i][0:2]))
+
+    #print(high)
     return high
 
 def unpack_player_experience():
     experience = [d['experience'] for d in player_info if 'experience' in d]
-    value = []
+    value = defaultdict(list)
     for i in range(len(experience)): 
         if(experience[i] == 'YES'):
-            experience[i] = 'True'
-            value.append(experience[i])
+            experience[i] = True
+            value[i].append(experience[i])
         else:
-            experience[i] = 'False'
-            value.append(experience[i])
+            experience[i] = False
+            value[i].append(experience[i])
     #print(value)
     return(value)
 
@@ -97,25 +102,20 @@ def print_the_list(drafted_team):
     total_players = len(drafted_team[0])-1
     experienced_players = drafted_team[3].count('True')
     inexperienced_players = drafted_team[3].count('False')
-    height_in_int = drafted_team[2]
-    height = []
-    names = ', '.join(drafted_team[1])
-    guardians = ', '.join(drafted_team[4])
-    _names = guardians.replace(" and", ",")
+    #height_in_int = drafted_team[2]
+    #height = []
+    
 
-
-    for i in range(0, len(height_in_int)):
-        height.append(int(height_in_int[i]))
 
     average_height = round(statistics.mean(height),2)
     dashes = "-"*30
     
-    print("\nNow Showing Stats For: {}\n\nStart of Data\n{}".format(drafted_team[0][0],dashes))
+    '''print("\nNow Showing Stats For: {}\n\nStart of Data\n{}".format(drafted_team[0][0],dashes))
 
     print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches\n{}".format(total_players,experienced_players,inexperienced_players, average_height, dashes))
 
     print("Players on Team: \n\t{}".format(names))
-    print("\nGuardians of Players: \n\t{}\n{}\nEnd of Data\n".format(_names, dashes))
+    print("\nGuardians of Players: \n\t{}\n{}\nEnd of Data\n".format(_names, dashes))'''
 
 
 if __name__ == "__main__":
@@ -123,11 +123,11 @@ if __name__ == "__main__":
     height = unpack_player_height()
     value = unpack_player_experience()
     guardians = unpack_player_guardians()
-    roster = create_dict(name, height, value, guardians)
-    team = teams()
-    game_time = random_sort(roster, team)
+    #roster = create_dict(name, height, value, guardians)
+    #team = teams()
+    #game_time = random_sort(roster, team)
 
-    continuing_on = ''
+    '''continuing_on = ''
     while continuing_on.lower() != 'n':
 
         team_number = ''
@@ -142,7 +142,10 @@ if __name__ == "__main__":
         print_the_list(drafted_team)
         continuing_on = input("\nWould you like to get stats [y/n]: ")
         if(continuing_on == 'n'):
-            print("Good Bye")
+            print("Good Bye")'''
+
+        
+    print(name, height, value, guardians)
 
         
 
