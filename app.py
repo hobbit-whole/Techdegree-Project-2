@@ -36,14 +36,14 @@ def unpack_player_height():
 
 def unpack_player_experience():
     experience = [d['experience'] for d in player_info if 'experience' in d]
-    value = defaultdict(list)
+    value = []
     for i in range(len(experience)): 
         if(experience[i] == 'YES'):
             experience[i] = True
-            value[i].append(experience[i])
+            value.append(experience[i])
         else:
             experience[i] = False
-            value[i].append(experience[i])
+            value.append(experience[i])
     #print(value)
     return(value)
 
@@ -145,7 +145,7 @@ if __name__ == "__main__":
             print("Good Bye")'''
 
         
-    print(name, height, value, guardians)
+    print(value)
 
         
 
