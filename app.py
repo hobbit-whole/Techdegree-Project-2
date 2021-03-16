@@ -129,15 +129,20 @@ if __name__ == "__main__":
 
     continuing_on = ''
     while continuing_on.lower() != 'n':
-        try:
-            team_number = int(input("\n1) Panthers \n2) Bandits  \n3) Warriors\n \nPick a Team: "))-1
-        except ValueError:
-            print("Please enter in a number")
-        
+
+        team_number = ''
+        while team_number not in range(0,3):
+            try:
+                team_number = int(input("\n1) Panthers \n2) Bandits  \n3) Warriors\n \nPick a Team: "))-1
+            except ValueError:
+                print('Please enter number 1, 2, or 3')
+
         drafted_team = draft_team_players(game_time, team_number)
     
         print_the_list(drafted_team)
         continuing_on = input("\nWould you like to get stats [y/n]: ")
+        if(continuing_on == 'n'):
+            print("Good Bye")
 
         
 
