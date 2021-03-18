@@ -75,14 +75,28 @@ def random_sort(roster):
             if master_list[i] not in team_roster:
                 team_roster.append(master_list[i])
     
-    print(team_roster)
+    #print(team_roster)
     return team_roster
 
 def assigned_to_team(roster_list):
     
-    
-    print(roster_list)
+    print(roster_list[0][2], team_info[0])
+    length_player = int(len(roster_list)/len(team_info))
+    _random_list = defaultdict(list)
+    team = []
 
+    #for i in range(0, len(team_info)):
+    while j < 18:
+        for j in range(0,18):
+            if j <= 5 and j > 0:
+                print(roster_list[j])
+                if j < 11 and j >= 6:
+                    print(roster_list[j])
+                    if j < 18:
+                        print(roster_list[j])
+
+
+            
 
 
 
