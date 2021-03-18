@@ -78,6 +78,12 @@ def random_sort(roster):
     print(team_roster)
     return team_roster
 
+def assigned_to_team(roster_list):
+    
+    
+    print(roster_list)
+
+
 
 
 if __name__ == "__main__":
@@ -87,4 +93,5 @@ if __name__ == "__main__":
     guardians = unpack_player_guardians()
     roster = create_dict(name, height, value, guardians)
     game_time = random_sort(roster)
+    assigned_to_team(game_time)
     
