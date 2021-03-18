@@ -13,17 +13,23 @@ for team in TEAMS:
 
 def unpack_player_name():
     names = [d['name'] for d in player_info if 'name' in d]
-    names = ', '.join(names)
     #print(names)
     return names
 
 def unpack_player_guardians():
+
+    _list_guardians = []
+
     guardians = [d['guardians'] for d in player_info if 'guardians' in d]
 
-    guardians = ', '.join(guardians)
-    _names_of_guard = guardians.replace(" and", ",")
-    #print(_names_of_guard)
-    return _names_of_guard
+    guardians = ', '.join(guardians).replace(" and", ",")
+
+    for item in guardians:
+        item = guardians.split(', ')
+        _list_guardians = item
+
+    
+    return _list_guardians
 
 def unpack_player_height():
     height = [d['height'] for d in player_info if 'height' in d]
@@ -51,9 +57,9 @@ def unpack_player_experience():
 def create_dict(name, height, value, guardians):
 
     roster = defaultdict(list)
-    for i in range(0,len(player_info)):
-        roster[i] = name[i], height[i], value[i], guardians[i]
-    #print(roster)
+    for i in range(int(len(player_info))):
+        roster[i] = name[i], height[i], value[i]
+    #print(len(player_info))
     return roster
 
 
@@ -65,16 +71,20 @@ def teams():
     return indie_team
 
 def random_sort(roster, team):
-    team_roster = defaultdict(list)
-    max_team_people = int(len(player_info)/len(team_info))
 
-    for j in range(0,len(team)):
-        team_roster[j].append(team[j])
+    team_roster = []
+    master_list = []
 
-        for _ in range(0,max_team_people):
-            team_roster[j] += (random.choices(roster))
 
-    #print(team_roster)
+    while len(team_roster) <= 17:
+        master_list = random.choices(roster, k=len(roster))
+        
+        for i in range(0, len(roster)):
+            if master_list[i] not in team_roster:
+                team_roster.append(master_list[i])
+    
+    
+    print(len(team_roster))
     return team_roster
 
 def draft_team_players(game_time, team_number):
@@ -123,9 +133,9 @@ if __name__ == "__main__":
     height = unpack_player_height()
     value = unpack_player_experience()
     guardians = unpack_player_guardians()
-    #roster = create_dict(name, height, value, guardians)
-    #team = teams()
-    #game_time = random_sort(roster, team)
+    roster = create_dict(name, height, value, guardians)
+    team = teams()
+    game_time = random_sort(roster, team)
 
     '''continuing_on = ''
     while continuing_on.lower() != 'n':
@@ -143,12 +153,4 @@ if __name__ == "__main__":
         continuing_on = input("\nWould you like to get stats [y/n]: ")
         if(continuing_on == 'n'):
             print("Good Bye")'''
-
-        
-    print(value)
-
-        
-
-    
-
     
