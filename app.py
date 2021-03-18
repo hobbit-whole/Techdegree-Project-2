@@ -80,45 +80,6 @@ def random_sort(roster):
     print(team_roster)
     return team_roster
 
-def draft_team_players(game_time, team_number):
-    team_players = game_time[team_number]
-    player_name =  []
-    player_height = []
-    player_experience = []
-    player_guardians = []
-
-    #print(team_number)
-
-    for i in range(1,len(team_players)):
-        player_name.append(team_players[i][0])
-        player_height.append(team_players[i][1])
-        player_experience.append(team_players[i][2])
-        player_guardians.append(team_players[i][3])
-
-
-    return team_players, player_name, player_height, player_experience, player_guardians
-
-
-
-def print_the_list(drafted_team):
-
-    total_players = len(drafted_team[0])-1
-    experienced_players = drafted_team[3].count('True')
-    inexperienced_players = drafted_team[3].count('False')
-    #height_in_int = drafted_team[2]
-    #height = []
-    
-
-
-    average_height = round(statistics.mean(height),2)
-    dashes = "-"*30
-    
-    '''print("\nNow Showing Stats For: {}\n\nStart of Data\n{}".format(drafted_team[0][0],dashes))
-
-    print("Amount of Players: {}\nExperienced: {}\nInexperienced: {}\nAverage Height {} inches\n{}".format(total_players,experienced_players,inexperienced_players, average_height, dashes))
-
-    print("Players on Team: \n\t{}".format(names))
-    print("\nGuardians of Players: \n\t{}\n{}\nEnd of Data\n".format(_names, dashes))'''
 
 
 if __name__ == "__main__":
