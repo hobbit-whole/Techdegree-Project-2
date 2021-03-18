@@ -62,29 +62,22 @@ def create_dict(name, height, value, guardians):
     #print(len(player_info))
     return roster
 
+    
 
-def teams():
-    indie_team = {}
-    for i in range(len(team_info)):
-        indie_team[i] = team_info[i]
-    #print(indie_team)
-    return indie_team
-
-def random_sort(roster, team):
+def random_sort(roster):
 
     team_roster = []
     master_list = []
 
+    #print(indie_team)
 
-    while len(team_roster) <= 17:
+    while len(team_roster) < len(roster):
         master_list = random.choices(roster, k=len(roster))
-        
         for i in range(0, len(roster)):
             if master_list[i] not in team_roster:
                 team_roster.append(master_list[i])
     
-    
-    print(len(team_roster))
+    print(team_roster)
     return team_roster
 
 def draft_team_players(game_time, team_number):
@@ -134,8 +127,7 @@ if __name__ == "__main__":
     value = unpack_player_experience()
     guardians = unpack_player_guardians()
     roster = create_dict(name, height, value, guardians)
-    team = teams()
-    game_time = random_sort(roster, team)
+    game_time = random_sort(roster)
 
     '''continuing_on = ''
     while continuing_on.lower() != 'n':
