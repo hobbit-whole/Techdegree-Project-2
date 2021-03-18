@@ -69,8 +69,6 @@ def random_sort(roster):
     team_roster = []
     master_list = []
 
-    #print(indie_team)
-
     while len(team_roster) < len(roster):
         master_list = random.choices(roster, k=len(roster))
         for i in range(0, len(roster)):
@@ -89,21 +87,4 @@ if __name__ == "__main__":
     guardians = unpack_player_guardians()
     roster = create_dict(name, height, value, guardians)
     game_time = random_sort(roster)
-
-    '''continuing_on = ''
-    while continuing_on.lower() != 'n':
-
-        team_number = ''
-        while team_number not in range(0,3):
-            try:
-                team_number = int(input("\n1) Panthers \n2) Bandits  \n3) Warriors\n \nPick a Team: "))-1
-            except ValueError:
-                print('Please enter number 1, 2, or 3')
-
-        drafted_team = draft_team_players(game_time, team_number)
-    
-        print_the_list(drafted_team)
-        continuing_on = input("\nWould you like to get stats [y/n]: ")
-        if(continuing_on == 'n'):
-            print("Good Bye")'''
     
