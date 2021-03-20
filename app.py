@@ -74,16 +74,38 @@ def assigned_to_team(roster_list):
     x = 0
     test = 0
     
-    
     for j in range(3):
         team[j].append(team_info[j])
-
         for i in range(6):     
-            while test != 3 and x != 3:
-                
+            if team_info[j] == 'Panthers':
+                while test != 3 and x != 3:
+                    if team[0][i][2] == True:
+                        test += 1
+                    else:
+                        x += 1
                 if roster_list[i] not in team[j]:
                     team[j].append(roster_list[i])
-                    print(team[j], roster_list)
+ 
+            if team_info[j] == 'Bandits':
+                i += 5
+                while test != 3 and x != 3:
+                    if team[0][i][2] == True:
+                        test += 1
+                    else:
+                        x += 1
+                if roster_list[i] not in team[j]:
+                    team[j].append(roster_list[i])
+
+            if team_info[j] == 'Warriors':
+                i += 11
+                while test != 3 and x != 3:
+                    if team[0][i][2] == True:
+                        test += 1
+                    else:
+                        x += 1
+                if roster_list[i] not in team[j]:
+                    team[j].append(roster_list[i])
+   
     return(team)
 
 
@@ -99,7 +121,7 @@ if __name__ == "__main__":
     dashes = "-"
     
 
-    '''team_number = int(input('\nHere are the teams\n\n 1) Panthers\n 2) Bandits\n 3) warriors\n\nEnter in an option:  '))
+    team_number = int(input('\nHere are the teams\n\n 1) Panthers\n 2) Bandits\n 3) warriors\n\nEnter in an option:  '))
     
     if team_number <= 3:
         print('{}\nYou selected: {}\n'.format(dashes*25, sorted_roster[team_number-1][0]))
@@ -111,7 +133,7 @@ if __name__ == "__main__":
             experience_list.append(sorted_roster[team_number-1][y][2])
         true_count = sum(experience_list)
         false_count = 6 - true_count
-        #print(true_count)
+        print(true_count)
 
         print('Experienced Players: {}'.format(true_count))
         print('Inexperienced Player: {}'.format(false_count))
@@ -137,4 +159,4 @@ if __name__ == "__main__":
         for i in range(1, len(sorted_roster[team_number-1])):
             guardian_for_player.append(sorted_roster[team_number-1][i][3])
             names_of_guardians = ', '.join(guardian_for_player).replace(" and", ",")
-        print('Guardians: \n\t{}\n'.format(names_of_guardians))'''
+        print('Guardians: \n\t{}\n'.format(names_of_guardians))
