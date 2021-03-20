@@ -21,6 +21,9 @@ def unpack_player_name():
 def unpack_player_guardians():
     guardians = [d['guardians'] for d in player_info if 'guardians' in d]
 
+
+    #print(names_of_guardians)
+
     return guardians
 
 def unpack_player_height():
@@ -49,9 +52,11 @@ def unpack_player_experience():
 def create_dict(name, height, value, guardians):
 
     roster = defaultdict(list)
+
     for i in range(int(len(player_info))):
         roster[i] = name[i], height[i], value[i], guardians[i]
-    #print(len(player_info))
+
+    #print(guardians)
     return roster
 
 def assigned_to_team(roster_list):
