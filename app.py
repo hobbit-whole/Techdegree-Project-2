@@ -71,33 +71,32 @@ def populate_team(roster_list):
     return team_roster
 
 def assigned_to_team(roster_list):
-    experience = 0
-    inexperience = 0
+
     team = defaultdict(list)
     picked_player= []
+    temp_player_list = []
+
 
     for i in range(len(roster_list)):
         picked_player.append(roster_list[i])
 
-    for j in range(len(team_info)):
-        team[j].append(team_info[j])
-        for i in range(len(roster_list)):
-            picked_player.append(roster_list[i])
-            if len(team[j]) < 6:
-                experience = 0
-                inexperience = 0
-                while experience < 3 and inexperience < 3:
-                    if roster[i][2] == True:
-                        team[j].append(picked_player.pop(i))
-                        experience += 1
-                        
-                    else:
-                        team[j].append(picked_player.pop(i))
-                        inexperience += 1
-                
-
+    for i in range(len(roster_list)):
+        for j in range(len(team_info)):
+            team[j].append(team_info[j])
+            for i in range(len(roster_list)):
+                picked_player.append(roster_list[i])
+                if len(team[j]) < 6:
+                    experience = 0
+                    inexperience = 0
+                    while experience < 3 and inexperience < 3:
+                        if roster_list[i][2] == True:
+                            team[j].append(picked_player.pop(i))
+                            experience += 1
+                            
+                        else:
+                            team[j].append(picked_player.pop(i))
+                            inexperience += 1
     
-    print(team[1])
     return team
 
 
