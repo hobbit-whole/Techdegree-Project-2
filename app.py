@@ -83,20 +83,22 @@ def assigned_to_team(roster_list):
     for i in range(len(roster_list)):
         for j in range(len(team_info)):
             team[j].append(team_info[j])
-            for i in range(len(roster_list)):
-                picked_player.append(roster_list[i])
-                if len(team[j]) < 6:
-                    experience = 0
-                    inexperience = 0
-                    while experience < 3 and inexperience < 3:
-                        if roster_list[i][2] == True:
-                            team[j].append(picked_player.pop(i))
-                            experience += 1
-                            
-                        else:
-                            team[j].append(picked_player.pop(i))
-                            inexperience += 1
-    
+            experience = 0
+            inexperience = 0
+
+            while len(team[j]) < 7:
+                
+                if experience != 3 and inexperience != 3:
+                    if roster_list[i][2] == True:
+                        team[j].append(picked_player.pop(i))
+                        experience += 1
+                        
+                    else:
+                        team[j].append(picked_player.pop(i))
+                        inexperience += 1   
+                
+
+
     return team
 
 
