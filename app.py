@@ -1,12 +1,9 @@
-from os import O_TEMPORARY
 from constants import TEAMS, PLAYERS
 from collections import defaultdict
 import random, statistics
 
 player_info = []
 team_info = []
-
-
 
 
 
