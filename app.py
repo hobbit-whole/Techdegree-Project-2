@@ -1,3 +1,4 @@
+from os import O_TEMPORARY
 from constants import TEAMS, PLAYERS
 from collections import defaultdict
 import random, statistics
@@ -76,34 +77,50 @@ def assigned_to_team(roster_list):
     picked_player= []
     temp_player_list = []
 
+    for i in range(len(roster_list)):
+        picked_player.append(roster_list[i])
 
-    for pick_player_list in roster_list:
-        picked_player.append(pick_player_list)
-    j = 0
-    
     for j in range(len(team_info)):
-        team[j].append(team_info[j])
-        experience = 0
-        inexperience = 0
-        for i in range(len(picked_player)):
-            if len(team[j]) <= 6 and picked_player[i][2] == True:
-                if experience < 3 or experience != 3:
-                    team[j].append(picked_player.pop(i))
-                    experience += 1          
-                else:
-                    temp_player_list.append(picked_player.pop(i))
+            team[j].append(team_info[j])
+    j = 0
+    i = 0
     
-            elif picked_player[i][2] == False and len(team[j]) <= 6:
-                if inexperience < 3 or inexperience != 3:
+    
+    for i in range(len(picked_player)):
+        for j in range(len(team)):
+            experience = 0
+            inexperience = 0
+
+            if experience <= 3:
+                if picked_player[i][2] == True:
                     team[j].append(picked_player.pop(i))
-                    inexperience += 1          
+                    experience += 1  
+
+                elif inexperience < 3:
+                    #print(picked_player[i][2], "inexp")
+
+                    if picked_player[i][2] == False:
+                        team[j].append(picked_player.pop(i))
+                        inexperience += 1  
+
+                    else:
+                        team[j].append(picked_player.pop(i))
+                        experience += 1
                 else:
                     temp_player_list.append(picked_player.pop(i))
+            
 
-            else:
-                temp_player_list.append(picked_player.pop(i)) 
-                break     
-                
+                while team[j] == 2:
+                    if len(temp_player_list) > 0:
+                        print(temp_player_list[i], print(temp_player_list[i][2]))
+                        if temp_player_list[i][2] == True: 
+                            team[j].append(temp_player_list.pop(i))
+                        else:
+                            team[j].append(temp_player_list.pop(i))
+
+
+
+    print(team)
     return team
 
 
@@ -131,15 +148,15 @@ if __name__ == "__main__":
             experience = 0
             inexperience = 0
             for i in range(1, len(sorted_roster[team_number-1])):
-                print(sorted_roster[team_number-1][i][2])
+                #print(sorted_roster[team_number-1][i][2])
                 if sorted_roster[team_number-1][i][2] == True:
                     experience += 1
                 else:
                     inexperience += 1
-            print(experience, inexperience)
+            #print(experience, inexperience)
 
-            #print('Experienced Players: {}'.format(true_count))
-            #print('Inexperienced Player: {}'.format(false_count))
+            print('Experienced Players: {}'.format(experience))
+            print('Inexperienced Player: {}'.format(inexperience))
 
 
 
@@ -147,7 +164,7 @@ if __name__ == "__main__":
             for i in range(1, len(sorted_roster[team_number-1])):
                 height_list = []
                 height_list.append(sorted_roster[team_number-1][i])
-                for z in range(0, len(height_list)):
+                for z in range(len(height_list)):
                     _list_of_height.append(height_list[z][1])
             _average_player = round(statistics.mean(_list_of_height), 1)
             print('Average Height: {} inches\n{}'.format(_average_player, dashes*25))
