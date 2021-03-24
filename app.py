@@ -90,37 +90,23 @@ def assigned_to_team(roster_list):
         for j in range(len(team)):
             experience = 0
             inexperience = 0
-
-            if experience <= 3:
-                if picked_player[i][2] == True:
+            
+            while len(team[j]) < 7 and len(picked_player) > 0:
+                if experience < 3 and picked_player[i][2] == True:          
                     team[j].append(picked_player.pop(i))
                     experience += 1  
 
-                elif inexperience < 3:
-                    #print(picked_player[i][2], "inexp")
+                elif inexperience < 3 and picked_player[i][2] == False:          
+                    team[j].append(picked_player.pop(i))
+                    inexperience += 1  
 
-                    if picked_player[i][2] == False:
-                        team[j].append(picked_player.pop(i))
-                        inexperience += 1  
-
-                    else:
-                        team[j].append(picked_player.pop(i))
-                        experience += 1
                 else:
                     temp_player_list.append(picked_player.pop(i))
-            
 
-                while team[j] == 2:
-                    if len(temp_player_list) > 0:
-                        print(temp_player_list[i], print(temp_player_list[i][2]))
-                        if temp_player_list[i][2] == True: 
-                            team[j].append(temp_player_list.pop(i))
-                        else:
-                            team[j].append(temp_player_list.pop(i))
+            while len(temp_player_list) > 0:
+                team[2].append(temp_player_list.pop(i))
 
-
-
-    print(team)
+    #print(team)
     return team
 
 
@@ -148,12 +134,10 @@ if __name__ == "__main__":
             experience = 0
             inexperience = 0
             for i in range(1, len(sorted_roster[team_number-1])):
-                #print(sorted_roster[team_number-1][i][2])
                 if sorted_roster[team_number-1][i][2] == True:
                     experience += 1
                 else:
                     inexperience += 1
-            #print(experience, inexperience)
 
             print('Experienced Players: {}'.format(experience))
             print('Inexperienced Player: {}'.format(inexperience))
