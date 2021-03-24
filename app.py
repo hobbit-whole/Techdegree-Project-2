@@ -127,6 +127,7 @@ if __name__ == "__main__":
     _continue_choice = ''
 
     while menu_response != 1 and menu_response != 2:
+        
         print('\nBASKETBALL TEAM STATS TOOL')
 
         print('\n{}MENU{}'.format(dashes*10, dashes*10))
@@ -139,6 +140,9 @@ if __name__ == "__main__":
                 
         except NameError:
             print('Please choose between 1 and 2')
+        
+        if menu_response > 2 or menu_response < 1:
+            print('Please enter in a 1 or 2')
 
 
         while menu_response == 1 and _continue_choice.lower() != 'n':  
@@ -193,7 +197,8 @@ if __name__ == "__main__":
 
             
             _continue_choice = input('{}\nWould you like to pick another team (y/n): '.format(dashes*25))
-
+            if _continue_choice.lower() == 'n':
+                break
             menu_response = 0
     
     else:
