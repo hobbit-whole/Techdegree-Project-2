@@ -1,9 +1,6 @@
 from constants import TEAMS, PLAYERS
 from collections import defaultdict
-import random, statistics
-
-player_info = []
-team_info = []
+import random, statistics, copy
 
 
 
@@ -105,10 +102,16 @@ def assigned_to_team(roster_list, team_info):
 
 
 if __name__ == "__main__":
-    for player in PLAYERS:
+    teams = copy.copy(TEAMS)
+    players = copy.copy(PLAYERS)
+
+    player_info = []
+    team_info = []
+
+    for player in players:
         player_info.append(player)
 
-    for team in TEAMS:
+    for team in teams:
         team_info.append(team)
 
     name = unpack_player_name(player_info)
@@ -193,7 +196,7 @@ if __name__ == "__main__":
                 print('Please enter in a number between 1-3')
 
             
-            _continue_choice = input('{}\nWould you like to pick another team (y/n): '.format(dashes*25))
+            _continue_choice = input('{}\nWould you like to return to the Main Menu (y/n): '.format(dashes*25))
             if _continue_choice.lower() == 'n':
                 break
             menu_response = 0
